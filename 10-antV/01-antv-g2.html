@@ -1,0 +1,89 @@
+<!-- AntV 是蚂蚁金服全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠、无限可能的数据可视化最佳实践。 -->
+<!-- 
+  AntV 包括以下解决方案：
+  G2：可视化引擎
+  G2Plot：图表库
+  G6：图可视化引擎
+  Graphin：基于 G6 的图分析组件
+  F2：移动可视化方案
+  ChartCube：AntV 图表在线制作
+  L7：地理空间数据可视化
+ -->
+
+<!-- G2Plot教程:  https://g2plot.antv.vision/zh/docs/manual/getting-started -->
+<!-- 
+  Antv G2 的绘图流程：
+  引入 js 库
+  编写渲染容器 DOM
+  准备渲染数据
+  获取渲染 DOM 对象
+  初始化 G2 绘图对象（如：G2Plot.Line），配置绘图参数
+  调用 render 完成渲染
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>antv G2</title>
+  <script src="https://unpkg.com/@antv/g2plot@1.1.28/dist/g2plot.js"></script>
+</head>
+
+<body>
+  <div id="g2-chart"></div>
+  <script>
+    const data = [
+      { year: '1991', value: 3 },
+      { year: '1992', value: 4 },
+      { year: '1993', value: 3.5 },
+      { year: '1994', value: 5 },
+      { year: '1995', value: 4.9 },
+      { year: '1996', value: 6 },
+      { year: '1997', value: 7 },
+      { year: '1998', value: 9 },
+      { year: '1999', value: 13 },
+    ]
+    const chartDom = document.getElementById('g2-chart')
+    const line = new G2Plot.Line(chartDom, {
+      title: {
+        visible: true,
+        text: 'g2折线图示例',
+      },
+      description: {
+        visible: true,
+        text: '折线图用于表示连续时间跨度内的数据，它通常用于显示某变量随时间的变化模式。'
+      },
+      data,
+      autoFit: true,
+      xField: 'year',
+      yField: 'value',
+      color: '#fe740c',
+      point: {
+        visible: true,
+        size: 5,
+        color: '#fff',
+        style: {
+          stroke: '#fe740c',
+          lineWidth: 1,
+          fillOpacity: 0.6
+        }
+      },
+      label: {
+        visible: true
+        // fill: '#fe740c'
+      },
+      yAxis: {
+        label: {
+          formatter: (v) => {
+            return `${v}k`
+          }
+        }
+      }
+    })
+    line.render()
+  </script>
+</body>
+
+</html>

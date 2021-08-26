@@ -1,0 +1,53 @@
+<!-- Three.js 是一个基于 WebGL 的 Javascript 3D 图形库
+  底层是基于WebGL绘制3D效果图，但是比WebGL更易于理解
+  https://threejs.org/docs/ 官网教程
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test Three.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.116.1/build/three.js"></script>
+  <style>
+    body { margin: 0; }
+  </style>
+</head>
+
+<body>
+  <script>
+    var camera, scene, renderer
+    var geometry, material, mesh
+
+    init() // 图形的渲染
+    animate() // 图形的运动
+
+    function init() {
+      // 初始化相机，调整角度
+      // three.js里有几种不同的相机，在这里，我们使用的是PerspectiveCamera（透视摄像机）
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000)
+      camera.position.z = 5
+      // 初始化一个场景
+      scene = new THREE.Scene()
+      geometry = new THREE.BoxGeometry()
+      material = new THREE.MeshNormalMaterial( {color: 0x00ff00})
+      mesh = new THREE.Mesh(geometry, material)
+      scene.add(mesh)
+      // 建立渲染器，最后调用three.webGLRenderer 进行绘制
+      renderer = new THREE.WebGLRenderer({ antialias: true })
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      document.body.appendChild(renderer.domElement)
+    }
+    function animate() {
+      requestAnimationFrame(animate)
+      mesh.rotation.x += 0.01
+      mesh.rotation.y += 0.02
+      renderer.render(scene, camera)
+    }
+  </script>
+</body>
+
+</html>

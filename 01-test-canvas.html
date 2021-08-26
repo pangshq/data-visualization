@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test Canvas</title>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d') // 获取到 Canvas 对象
+    ctx.fillStyle = 'red' // 修改填充色为red
+    ctx.fillRect(0,0, 50, 50) // 绘制矩形
+
+    // 绘制线段
+    ctx.beginPath()
+    ctx.lineWidth = 2
+    ctx.strokeStyle = 'blue'
+    ctx.moveTo(100, 100) // 起点坐标
+    ctx.lineTo(250, 75) // 中点坐标
+    // ctx.stroke()
+    ctx.lineWidth = 1   // 修改前要终结上一次绘制
+    ctx.lineTo(300, 100) // 终点坐标
+    ctx.stroke()
+
+
+    ctx.beginPath()  
+    ctx.lineWidth = 2
+    ctx.strokeStyle = 'green'
+    ctx.fillStyle = 'red'
+    ctx.arc(200, 200, 50, 0, 2 * Math.PI) // 绘制圆形
+    ctx.stroke()
+    ctx.fill()
+
+
+    // 绘制点
+    ctx.beginPath()
+    ctx.lineWidth = 1
+    ctx.strokeStyle = 'red'
+    ctx.moveTo(300, 300) // 起点坐标
+    ctx.lineTo(301, 301) // 点坐标
+    ctx.stroke()
+
+    /** 
+     * 编写 canvas 标签（注意指定宽高）
+        获取 canvas DOM 对象
+        获取 Canvas 对象
+        设置绘图属性
+        调用绘图 API
+    */
+   
+  </script>
+</body>
+</html>
