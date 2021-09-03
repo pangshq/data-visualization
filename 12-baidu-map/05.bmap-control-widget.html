@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bmap</title>
+  <script type="text/javascript"
+    src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=SkAtaXVSKHobtCTU0eGvyWV4OMmsnhD7"></script>
+  <style type="text/css">
+    html,
+    body,
+    #map {
+      height: 100%;
+      margin: 0px;
+      padding: 0px
+    }
+    .anchorBL,.BMap_cpyCtrl {
+      display: none;
+    }
+    /* .anchorBL img{
+      display: none;
+    } */
+    .BMap_stdMpZoom{
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+    var map = new BMapGL.Map("map", {
+      // 限制放大缩小范围
+      minZoom: 8,
+      maxZoom: 12,
+      mapType: BMAP_NORMAL_MAP,
+    });
+    var point = new BMapGL.Point(113.331084, 23.112223);
+    map.centerAndZoom(point, 10);
+    var heading = 0;
+    map.setHeading(0)
+    map.setTilt(70)
+    // 限制放大缩小范围
+    // 👇 下面两个方法在3.0版本中报错不生效
+    // map.setMinZoom(8)
+    // map.setMaxZoom(30)
+    // 放大缩小
+    var zoomCtrl = new BMapGL.ZoomControl({
+      anchor: BMAP_ANCHOR_BOTTOM_LEFT, // 一定要加上这个才会显示出来
+      // 控件位移
+      offset: new BMapGL.Size(10, 10),
+      // setMinZoom:
+      // setMinZoom
+    })
+    map.addControl(zoomCtrl)
+    // 给控件添加方法
+    map.addEventListener('zoomstart', function(){
+      console.log('zoom start => ',map.getZoom());
+    })
+    map.addEventListener('zoomend', function(){
+      console.log('zoom end => ',map.getZoom());
+    })
+    // scaleControl
+    var scaleCtrl = new BMapGL.ScaleControl({
+      anchor: BMAP_ANCHOR_TOP_LEFT, // 一定要加上这个才会显示出来
+      // 控件位移
+      offset: new BMapGL.Size(10, 10),
+    })
+    map.addControl(scaleCtrl)
+
+    
+  </script>
+</body>
+
+</html>

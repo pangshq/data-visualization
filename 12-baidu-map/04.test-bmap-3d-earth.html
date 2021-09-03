@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bmap</title>
+  <script type="text/javascript"
+    src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=SkAtaXVSKHobtCTU0eGvyWV4OMmsnhD7"></script>
+  <style type="text/css">
+    html,
+    body,
+    #map {
+      height: 100%;
+      margin: 0px;
+      padding: 0px
+    }
+
+    .anchorBL,
+    .BMap_cpyCtrl {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+    var map = new BMapGL.Map("map");
+    var point = new BMapGL.Point(113.331084, 23.112223);
+    map.centerAndZoom(point, 5);
+    var heading = 0;
+    map.setHeading(0)
+    map.setTilt(70)
+    map.setMapType(BMAP_EARTH_MAP) // 卫星图 
+    /** 
+     * 设置地图类型
+     * https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_webgl_1_0.html#a4b0 
+     * https://lbsyun.baidu.com/cms/jsapi/reference/jsapi_webgl_1_0.html#a5b0
+     * BMAP_NORMAL_MAP	此地图类型展示普通街道视图
+     * BMAP_EARTH_MAP	此地图类型展示地球卫星视图
+     */
+  </script>
+</body>
+
+</html>

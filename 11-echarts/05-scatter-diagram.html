@@ -1,0 +1,66 @@
+<!-- 
+  ECharts 基本概念：坐标系
+  很多系列，例如 line（折线图）、bar（柱状图）、scatter（散点图）、heatmap（热力图）等等，需要运行在 “坐标系” 上。
+  坐标系用于布局这些图，以及显示数据的刻度等等。
+  例如 ECharts 中至少支持这些坐标系：直角坐标系、极坐标系、地理坐标系（GEO）、单轴坐标系、日历坐标系 等。
+  其他一些系列，例如 pie（饼图）、tree（树图）等等，并不依赖坐标系，能独立存在。
+  还有一些图，例如 graph（关系图）等，既能独立存在，也能布局在坐标系中，依据用户的设定而来。
+
+  一个坐标系，可能由多个组件协作而成。我们以最常见的直角坐标系来举例。
+  直角坐标系中，包括有 xAxis（直角坐标系 X 轴）、yAxis（直角坐标系 Y 轴）、grid（直角坐标系底板）三种组件。
+  xAxis、yAxis 被 grid 自动引用并组织起来，共同工作。
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>echarts</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.js"></script>
+  <script src="./vintage.js"></script>
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    #chart {
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="chart"></div>
+  <script>
+    const chartDom = document.getElementById('chart')
+    const chart = echarts.init(chartDom, 'vintage')
+    chart.setOption({
+      title:{
+        text: 'ECharts 散点图'
+      },
+      xAxis: {},
+      yAxis: {},
+      dataset: {
+        source: [
+          [13, 44],
+          [52, 52],
+          [52, 32],
+          [67, 19],
+          [19, 33],
+        ]
+      },
+      series: [{
+        type: 'scatter',
+        encode: {x: 0, y: 1},
+      }]
+    }) // 完成渲染
+  </script>
+</body>
+
+</html>

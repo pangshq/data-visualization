@@ -27,7 +27,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>antv G2</title>
+  <title>antv G2Plot</title>
   <script src="https://unpkg.com/@antv/g2plot@1.1.28/dist/g2plot.js"></script>
 </head>
 
@@ -46,7 +46,7 @@
       { year: '1999', value: 13 },
     ]
     const chartDom = document.getElementById('g2-chart')
-    const line = new G2Plot.Line(chartDom, {
+    const line = new G2Plot.Line(chartDom, { // Column
       title: {
         visible: true,
         text: 'g2折线图示例',

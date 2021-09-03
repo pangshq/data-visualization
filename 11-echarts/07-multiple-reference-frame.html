@@ -1,0 +1,95 @@
+<!-- 
+  案例：多坐标系 
+  一个 ECharts 实例中，有多个 grid，每个 grid 分别有 xAxis、yAxis，
+  他们使用 xAxisIndex、yAxisIndex、gridIndex 来指定引用关系：
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>echarts</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.js"></script>
+  <script src="./vintage.js"></script>
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    #chart {
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="chart"></div>
+  <script>
+    const chartDom = document.getElementById('chart')
+    const chart = echarts.init(chartDom, 'vintage')
+    chart.setOption({
+      title: {
+        text: 'ECharts 多坐标系'
+      },
+      grid: [
+        {bottom: '55%'}, {top: '55%'}
+      ],
+      xAxis: [
+        {
+          type: 'category',
+          gridIndex: 0,
+        },
+        {
+          type: 'category',
+          gridIndex: 1,
+        }
+      ], // 多坐标系的时候需要明确指定x轴
+      yAxis: [{
+        min: 0,
+        max: 100, // 规定左侧坐标轴的取值范围
+        gridIndex: 0,
+      }, {
+        splitLine: {
+          show: false // 隐藏右侧坐标系的辅助线
+        },
+        gridIndex: 0,
+      }, {
+        min: 0,
+        max: 150,
+        gridIndex: 1,
+      }],
+      dataset: {
+        source: [
+          ['product', '2012', '2013', '2014', '2015'],
+          ['Matcha Latte', 41.1, 30.4, 65.1, 53.3],
+          ['Milk Tea', 86.5, 92.1, 85.7, 83.1]
+        ]
+      },
+      series: [{
+        type: 'bar',
+        seriesLayoutBy: 'row', // 按行的方式进行取数
+        xAxisIndex: 0,
+        yAxisIndex: 0, // 取第一个yAxis坐标系
+      }, {
+        type: 'line',
+        seriesLayoutBy: 'row', // 按行的方式进行取数
+        xAxisIndex: 0,
+        yAxisIndex: 1, // 取第二个yAxis坐标系
+
+      }, {
+        type: 'bar',
+        seriesLayoutBy: 'row', // 按行的方式进行取数
+        xAxisIndex: 1,
+        yAxisIndex: 2, // 取第二个yAxis坐标系
+
+      }]
+    }) // 完成渲染
+  </script>
+</body>
+
+</html>

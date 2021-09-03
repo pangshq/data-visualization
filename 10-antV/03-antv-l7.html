@@ -1,0 +1,58 @@
+<!-- L7 地理空间数据可视分析引擎 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>antv L7</title>
+  <script src="https://unpkg.com/@antv/l7"></script>
+  <style>
+    html, body{
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="l7-map"></div>
+  <script>
+    const scene = new L7.Scene({
+      id: 'l7-map',
+      map: new L7.GaodeMap({
+        mapStyle: 'dark', 
+        center:[120.19382669582967, 30.258134], // 地图的中心点
+        pitch: 0, // 俯视角度
+        zoom: 6, // 地图放大倍数
+        // token: 'e8653883477c1e38d190463340771816',
+      })
+    })
+    scene.on('loaded', () => {
+      fetch(
+        // 全球发电站数据
+        'https://gw.alipayobjects.com/os/basement_prod/337ddbb7-aa3f-4679-ab60-d64359241955.json' // 全球电量信息
+      )
+        .then(res => res.json())
+        .then(data => {
+          console.log('data => ',data)
+          data.features = data.features.filter(item => item.properties.capacity > 1000)
+          const pointLayer = new L7.PointLayer({})
+            .source(data)
+            .shape('circle') // square | triangle
+            .size('capacity',[0, 16]) // 电站的额发电量
+            .color('capacity',[
+              'red',
+              'blue',
+              'green'
+            ]) // 从前到深的配色方案，区分不同的发电站情况
+            .style({
+              strokeWidth: 0,
+              opacity: 0.5,
+            })
+            .active(true) // 点击交互
+          scene.addLayer(pointLayer)
+        })
+    })
+  </script>
+</body>
+</html>
